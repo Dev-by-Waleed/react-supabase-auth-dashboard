@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 import { supabase, logActivity } from './SupabaseClient';
 import toast from 'react-hot-toast';
 
-// Create a single supabase client for interacting with your database
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -27,14 +26,12 @@ const Dashboard = () => {
     const userData = async () => {
         const { data, error } = await supabase.auth.getSession();
 
-        // THE FIX: Check if there's an error OR if the session is missing/null
         if (error || !data?.session) {
             toast.error("No active session found, redirecting...")
             navigate('/Login');
-            return; // Stop running the rest of the function
+            return; 
         }
 
-        // If we make it here, we 100% have a logged-in user!
         // 1. Extract the user object
         const user = data.session.user;
         const { email, email_verified } = user.user_metadata;
@@ -48,10 +45,9 @@ const Dashboard = () => {
         setUserId(user.id);
         setName(user.user_metadata.name)
 
-        // 3. Log that the user viewed the dashboard right now
         await logActivity(user.id, 'Dashboard View', 'User accessed the main dashboard');
 
-        // 4. Fetch the most recent 5 activities to display on the screen
+        // 4. Fetch the most recent 5 activities
         const { data: history, error: fetchError } = await supabase
             .from('activities')
             .select('*')
@@ -75,7 +71,6 @@ const Dashboard = () => {
 
             {/* Main Content Wrapper */}
             <div className="flex-1 flex flex-col overflow-hidden">
-                {/* Top Header */}
                 <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sm:px-8">
                     <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
                     <div className="flex items-center space-x-4">
@@ -90,13 +85,11 @@ const Dashboard = () => {
 
                 {/* Scrollable Main Area */}
                 <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 sm:p-8">
-                    {/* Welcome Banner */}
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold text-gray-900">Welcome back {name}!</h2>
                         <p className="text-gray-600 mt-1">Here is what's happening with your account today.</p>
                     </div>
 
-                    {/* KPI Cards Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                         {/* Card 1 */}
                         <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -124,7 +117,6 @@ const Dashboard = () => {
                             <h3 className="text-lg font-medium text-gray-900">Recent Activity</h3>
                         </div>
 
-                        {/* NEW: Dynamic Activity List */}
                         <div className="p-6">
                             {activities.length > 0 ? (
                                 <ul className="space-y-4">

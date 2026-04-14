@@ -7,7 +7,6 @@ const Sidebar = ({ activePage, userId }) => { // Accept userId as a prop
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        // 1. Log the activity using the global function
         if (userId) {
             await logActivity(userId, 'Logout', 'User signed out');
         }
@@ -17,7 +16,6 @@ const Sidebar = ({ activePage, userId }) => { // Accept userId as a prop
         navigate("/Login");
         toast.error("logged out")
     };
-    // Helper to apply "active" styles
     const getLinkStyle = (pageName) => {
         const baseStyle = "block px-4 py-2 rounded-md font-medium transition-colors ";
         return activePage === pageName

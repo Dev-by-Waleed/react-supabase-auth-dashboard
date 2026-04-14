@@ -5,9 +5,7 @@ import Dashboard from './Components/Dashboard'
 import Profile from './Components/Profile'
 import Settings from './Components/Settings'
 import { Routes, Route } from 'react-router'
-import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
-// Create a single supabase client for interacting with your database
 
 export default function App() {
 

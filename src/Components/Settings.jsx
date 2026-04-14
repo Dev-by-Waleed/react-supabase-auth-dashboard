@@ -7,13 +7,11 @@ import toast from 'react-hot-toast';
 const Settings = () => {
     const navigate = useNavigate();
 
-    // States for the UI
     const [userEmail, setUserEmail] = useState('loading');
     const [avatarUrl, setAvatarUrl] = useState(null);
 
     const [userId, setUserId] = useState(null);
 
-    // States for the Password Update feature
     const [newPassword, setNewPassword] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
@@ -37,9 +35,8 @@ const Settings = () => {
         await logActivity(user.id, 'Settings View', 'User accessed the Settings');
     };
 
-    // THE REAL MAGIC: Updating the password in Supabase
     const handleUpdatePassword = async (e) => {
-        e.preventDefault(); // Stop the page from refreshing
+        e.preventDefault(); 
         if (newPassword.length < 6) {
             setMessage({ type: 'error', text: 'Password must be at least 6 characters.' });
             return;
@@ -48,7 +45,6 @@ const Settings = () => {
         setIsUpdating(true);
         setMessage({ type: '', text: '' });
 
-        // Tell Supabase to update the current user's password
         const { data, error } = await supabase.auth.updateUser({
             password: newPassword
         });
@@ -57,7 +53,7 @@ const Settings = () => {
             setMessage({ type: 'error', text: error.message });
         } else {
             setMessage({ type: 'success', text: 'Password updated successfully!' });
-            setNewPassword(''); // Clear the input
+            setNewPassword(''); 
 
             if (userId) {
                 logActivity(userId, "Password was changed", "User has changed the password")
@@ -79,7 +75,6 @@ const Settings = () => {
             {/* Main Content Wrapper */}
             <div className="flex-1 flex flex-col overflow-hidden">
 
-                {/* Top Header */}
                 <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sm:px-8">
                     <h1 className="text-xl font-semibold text-gray-800">Settings</h1>
                     <div className="flex items-center space-x-4">
@@ -101,7 +96,6 @@ const Settings = () => {
 
                     <div className="max-w-3xl mx-auto space-y-6">
 
-                        {/* Section 1: UI Placeholder for Avatar Upload */}
                         <div className="bg-white shadow-sm border border-gray-100 rounded-lg p-6">
                             <h2 className="text-lg font-medium text-gray-900">Profile Picture</h2>
                             <p className="text-sm text-gray-500 mt-1 mb-4">Update your avatar (Requires Supabase Storage setup).</p>
@@ -120,7 +114,6 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        {/* Section 2: REAL Password Update */}
                         <div className="bg-white shadow-sm border border-gray-100 rounded-lg p-6">
                             <h2 className="text-lg font-medium text-gray-900">Security</h2>
                             <p className="text-sm text-gray-500 mt-1 mb-6">Update your password associated with this account.</p>
@@ -153,7 +146,6 @@ const Settings = () => {
                             </form>
                         </div>
 
-                        {/* Section 3: App Preferences (Visual Only) */}
                         <div className="bg-white shadow-sm border border-gray-100 rounded-lg p-6">
                             <h2 className="text-lg font-medium text-gray-900">Preferences</h2>
                             <p className="text-sm text-gray-500 mt-1 mb-4">Manage your app experience.</p>
@@ -163,7 +155,6 @@ const Settings = () => {
                                     <p className="text-sm font-medium text-gray-900">Email Notifications</p>
                                     <p className="text-sm text-gray-500">Receive updates about your account activity.</p>
                                 </div>
-                                {/* A simple mock toggle switch */}
                                 <div className="w-11 h-6 bg-indigo-600 rounded-full flex items-center p-1 cursor-pointer">
                                     <div className="w-4 h-4 bg-white rounded-full shadow-sm translate-x-5"></div>
                                 </div>

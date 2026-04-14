@@ -74,7 +74,6 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Divider */}
         <div className="flex items-center mb-6">
           <div className="flex-grow border-t border-gray-600"></div>
           <span className="px-3 text-sm text-gray-400">or</span>

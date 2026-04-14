@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 const Profile = () => {
     const navigate = useNavigate();
 
-    // States for our profile data
     const [loading, setLoading] = useState(true);
     const [profileData, setProfileData] = useState({
         email: '',
@@ -36,7 +35,6 @@ const Profile = () => {
         const dateOnly = user.created_at.split('T')[0];
         console.log(user.user_metadata)
 
-        // 1. Update the state for the UI
         setProfileData({
             email: user.email,
             name: metadata.full_name || metadata.name || 'Dashboard User',
@@ -46,11 +44,8 @@ const Profile = () => {
             provider: user.app_metadata.provider || 'email'
         });
 
-        // 2. Turn off loading
         setLoading(false);
 
-        // 3. FIX: Use 'user.id' directly here! 
-        // Don't use 'profileData.userId' because it hasn't updated yet.
         await logActivity(user.id, 'Profile View', 'User accessed the Profile');
     };
 
@@ -60,20 +55,18 @@ const Profile = () => {
 
     return (
         <div className="flex h-screen bg-gray-50 font-sans text-gray-900">
-            {/* Sidebar Navigation - Kept identical, but updated active states */}
+            {/* Sidebar Navigation */}
             <Sidebar activePage="profile" userId={profileData.userId} />
 
-            {/* Main Content Wrapper */}
             <div className="flex-1 flex flex-col overflow-hidden">
 
-                {/* Top Header */}
                 <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sm:px-8">
                     <h1 className="text-xl font-semibold text-gray-800">My Profile</h1>
                     <div className="flex items-center space-x-4">
                         <span className="text-sm text-gray-600 hidden sm:inline-block">
                             {profileData.email}
                         </span>
-                        {/* Header Avatar: Shows image if it exists, otherwise the letter */}
+                        {/* Header Avatarr */}
                         {profileData.avatar ? (
                             <img src={profileData.avatar} alt="Profile" className="h-8 w-8 rounded-full border border-gray-200" />
                         ) : (
@@ -84,15 +77,13 @@ const Profile = () => {
                     </div>
                 </header>
 
-                {/* Scrollable Main Area */}
                 <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 sm:p-8">
 
                     {/* Profile Header Card */}
                     <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-8">
-                        <div className="h-32 bg-indigo-600"></div> {/* Banner color */}
+                        <div className="h-32 bg-indigo-600"></div>
                         <div className="px-6 sm:px-8 pb-8 flex flex-col sm:flex-row sm:items-end -mt-12 sm:-mt-16 space-y-4 sm:space-y-0 sm:space-x-6">
 
-                            {/* Big Profile Picture */}
                             <div className="relative">
                                 {profileData.avatar ? (
                                     <img

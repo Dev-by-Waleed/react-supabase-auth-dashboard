@@ -10,7 +10,7 @@ export default function Register() {
     const [loading, setLoading] = useState(false)
 
     const Reg = async (e) => {
-        e.preventDefault() // Prevents page reload
+        e.preventDefault() 
         setLoading(true)
 
         const { error } = await supabase.auth.signUp({
@@ -68,7 +68,6 @@ export default function Register() {
                     </button>
                 </div>
 
-                {/* Divider */}
                 <div className="flex items-center mb-6">
                     <div className="flex-grow border-t border-gray-600"></div>
                     <span className="px-3 text-sm text-gray-400">or</span>
