@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+
+.wrapper {
+  width: 54px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  left: 0;
+  transform-origin: 50%;
+  animation: circle7124 0.5s alternate infinite ease;
+}
+
+.circle:nth-child(1) {
+  left: 0;
+}
+
+.circle:nth-child(2) {
+  left: 22px;
+  animation-delay: 0.2s;
+}
+
+.circle:nth-child(3) {
+  left: 44px;
+  animation-delay: 0.3s;
+}
+
+.shadow {
+  width: 10px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.35);
+  position: absolute;
+  top: 14px;
+  left: 0;
+  filter: blur(1px);
+  animation: shadow046 0.5s alternate infinite ease;
+}
+
+.shadow:nth-child(4) {
+  left: 0;
+}
+
+.shadow:nth-child(5) {
+  left: 22px;
+  animation-delay: 0.2s;
+}
+
+.shadow:nth-child(6) {
+  left: 44px;
+  animation-delay: 0.3s;
+}
+
+@keyframes circle7124 {
+  0% {
+    top: 10px;
+    height: 4px;
+    border-radius: 50px 50px 25px 25px;
+    transform: scaleX(1.4);
+  }
+
+  40% {
+    height: 10px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes shadow046 {
+  0% {
+    transform: scaleX(1.3);
+  }
+
+  40% {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scaleX(0.4);
+    opacity: 0.4;
+  }
+}
