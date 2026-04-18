@@ -28,14 +28,17 @@ export default function Register() {
         }
     }
 
-    const googleLogin = async () => {
+    const googleRegister = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
                 redirectTo: `${window.location.origin}/Dashboard`
             }
         })
-        if (error) toast.error("Google login failed.")
+        if (error) toast.error("Google Register failed.")
+    }
+    const appleRegister = async () => {
+        toast.error("Apple Auth has not been added yet (coming soon...)")
     }
 
     return (
@@ -49,7 +52,7 @@ export default function Register() {
                 <div className="flex gap-4 mb-6">
                     <button
                         type="button"
-                        onClick={googleLogin}
+                        onClick={googleRegister}
                         className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-600 hover:bg-gray-700/50 transition-colors cursor-pointer">
                         <svg className="w-5 h-5" viewBox="0 0 24 24">
                             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -60,7 +63,10 @@ export default function Register() {
                         <span className="text-sm font-medium text-gray-300">Log in with Google</span>
                     </button>
 
-                    <button type="button" className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-600 hover:bg-gray-700/50 transition-colors cursor-pointer">
+                    <button
+                    type="button"
+                    onClick={appleRegister}
+                     className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-600 hover:bg-gray-700/50 transition-colors cursor-pointer">
                         <svg className="w-5 h-5" fill="white" viewBox="0 0 24 24">
                             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.05 2.26.7 2.92.7 1.01-.06 2.12-.83 3.51-.7 1.66.08 2.89.65 3.65 1.76-3.06 1.83-2.54 5.92.51 7.15-.71 1.76-1.57 3.05-2.59 4.06zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                         </svg>
