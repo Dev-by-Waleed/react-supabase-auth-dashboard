@@ -7,13 +7,7 @@ if (!supabaseUrl || !supabaseKey) {
     console.error("Supabase environment variables are missing. Check Netlify Environment Variables settings.");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey, {
-    auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-  }
-});
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const logActivity = async (uid, type, desc) => {
     if (!uid) return;
