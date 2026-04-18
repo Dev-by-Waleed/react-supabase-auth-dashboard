@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { supabase } from './SupabaseClient'
 import toast from 'react-hot-toast'
 
 export default function Register() {
     const navigate = useNavigate()
+
+    useEffect(() => {
+  const checkUser = async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) {
+      navigate('/Dashboard')
+    }
+  }
+  checkUser()
+}, [navigate])
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
